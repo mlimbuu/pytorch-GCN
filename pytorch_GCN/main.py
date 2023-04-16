@@ -55,10 +55,10 @@ if cuda:
 val_acc_list, val_loss_list, out_features = single_run1()
 
 # single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run1()
+val_acc_list, val_loss_list, out_features = single_run2()
 
 # single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run2()
+val_acc_list, val_loss_list, out_features = single_run3()
 
 avg_test_acc_list, avg_test_loss_list = multiple_runs()
 ## This give avg val accuracy and loss

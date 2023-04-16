@@ -3,6 +3,7 @@ import numpy as np
 import scipy.sparse as sp
 import networkx as nx
 import pickle as pkl
+import sys
 
 # normalize sparse adj matrix and features
 def normalize(mx):

@@ -1,4 +1,4 @@
-torch==2.0.0+cu118
+torch==2.0.0
 scipy
 torch_geometric==2.3.0
-degl==1.0.0
+dgl==1.0.0

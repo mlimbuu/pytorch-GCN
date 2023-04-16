@@ -42,7 +42,7 @@ def train_model(model, features, optimizer, epoch, adj, idx_train, idx_val, labe
       return acc_val, loss_val
 
  # test the GCN model     
-def test_model(model, features, optimizer, adj, idx_test, labels):
+def test_model(model, features, adj, idx_test, labels):
     model.eval()
     out_features = model(features, adj)
     loss_test = F.nll_loss(out_features[idx_test], labels[idx_test])
@@ -55,7 +55,7 @@ def test_model(model, features, optimizer, adj, idx_test, labels):
 
 # runs the training for single run
 """###1. Without EarlyStopping and BatchNormalization"""
-def single_run1(model, features, optimizer, adj, idx_train, idx_val, labels, epochs=200, earlyStopping=False):
+def single_run1(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels, epochs=200, earlyStopping=False):
   # Training the model
   start = time.time()
   val_acc_list = []
@@ -68,12 +68,13 @@ def single_run1(model, features, optimizer, adj, idx_train, idx_val, labels, epo
   print("Total time elapsed: {:.3f}s".format(time.time() - start))
 
   # Test the model
-  test_model()
+  test_model(model, features, adj, idx_test, labels)
   return val_acc_list, val_loss_list, out_features
 
 """####2. With EarlyStopping"""
 
-def single_run2(model, features, optimizer, adj, idx_train, idx_val, labels, epochs=200, patience=10, earlyStopping=True):
+def single_run2(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels, epochs=200, patience=10, earlyStopping=True):
+ 
   # Training the model
   start = time.time()
   val_acc_list = []
@@ -102,16 +103,13 @@ def single_run2(model, features, optimizer, adj, idx_train, idx_val, labels, epo
   print("Total time elapsed: {:.3f}s".format(time.time() - start))
 
   # Test the model
-  test_model()
+  test_model(model, features, adj, idx_test, labels)
   return val_acc_list, val_loss_list, out_features
-
-# single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run2()
 
 """####3. With batch normalization"""
 
 # runs the training for single run
-def single_run3(model, features, optimizer, adj, idx_train, idx_val, labels, epochs=200, earlyStopping=False):
+def single_run3(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels, epochs=200, earlyStopping=False):
   # Training the model
   start = time.time()
   val_acc_list = []
@@ -124,7 +122,7 @@ def single_run3(model, features, optimizer, adj, idx_train, idx_val, labels, epo
   print("Total time elapsed: {:.3f}s".format(time.time() - start))
 
   # Test the model
-  test_model()
+  test_model(model, features, adj, idx_test, labels)
   return val_acc_list, val_loss_list, out_features
  
  
@@ -133,7 +131,7 @@ This experiment is only run when you need to calculate the average validation ac
 """
 
 # runs the training and testing for 100 runs 
-def multiple_runs(model, features, optimizer, epoch, adj, idx_train, idx_val, labels,iter=100, epochs=200):
+def multiple_runs(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels, iter=100, epochs=200):
     # validation avg outcome
     avg_val_acc_list = []
     avg_val_loss_list = []
@@ -155,13 +153,12 @@ def multiple_runs(model, features, optimizer, epoch, adj, idx_train, idx_val, la
       print("Total time elapsed: {:.3f}s".format(time.time() - t_total))
 
       # Testing the model
-      acc_test, loss_test = test_model()
+      acc_test, loss_test = test_model(model, features, adj, idx_test, labels)
       avg_test_acc_list.append(acc_test.item())
       avg_test_loss_list.append(loss_test.item())
 
     return avg_test_acc_list, avg_test_loss_list
 
-avg_test_acc_list, avg_test_loss_list = multiple_runs()
 
 
 

@@ -51,23 +51,24 @@ if cuda:
   idx_test = idx_test.cuda()
 
 
-# single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run1()
+## single run output: val acc, val loos, outfeatures
+val_acc_list, val_loss_list, out_features = single_run1(model, features, optimizer, adj, idx_train, idx_val, idx_test,labels, epochs)
 
-# single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run2()
+# # single run output: val acc, val loos, outfeatures
+## val_acc_list, val_loss_list, out_features = single_run2(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels, epochs)
 
-# single run output: val acc, val loos, outfeatures
-val_acc_list, val_loss_list, out_features = single_run3()
+# # single run output: val acc, val loos, outfeatures
+## val_acc_list, val_loss_list, out_features = single_run3(model, features, optimizer, adj, idx_train, idx_val, idx_test,labels, epochs)
 
-avg_test_acc_list, avg_test_loss_list = multiple_runs()
-## This give avg val accuracy and loss
+## multiple runs output: avg val acc, avg val loss
+avg_test_acc_list, avg_test_loss_list = multiple_runs(model, features, optimizer, adj, idx_train, idx_val,idx_test, labels)
+# # This give avg val accuracy and loss
 sum(avg_test_acc_list)/len(avg_test_acc_list), sum(avg_test_loss_list)/len(avg_test_acc_list)
 
-"""####Visulaize Validation Performace"""
+# """####Visulaize Validation Performace"""
 
-visualize_validation_performance(val_acc_list, val_loss_list)
+# visualize_validation_performance(val_acc_list, val_loss_list)
 
-"""####Visulaize Learned Represenatation"""
+# """####Visulaize Learned Represenatation"""
 
-visualize_learnedFeature_tSNE(labels, out_features, dataset)
+# visualize_learnedFeature_tSNE(labels, out_features, dataset)

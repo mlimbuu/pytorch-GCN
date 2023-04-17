@@ -1,4 +1,4 @@
-# GCN-based-recommendation
-Graph Convolutional Networks (GCN) implementation using PyTorch to build recommendation system. 
+# GCN-using-Pytorch
+This is the implementation of paper: "Semi-Supervised Classification with Graph Convolutional Networks" using Pytorch.
 
 Updated Working Version: optimized_pytorch_GCN.ipynb

@@ -9,4 +9,5 @@ This is the implementation of paper: "Semi-Supervised Classification with Graph 
 ## References
 
 [Graph Convolutional Networks from Main Author](http://tkipf.github.io/graph-convolutional-networks/)
+
 [Graph Convolutional Networks: Introduction to GNNs](https://towardsdatascience.com/graph-convolutional-networks-introduction-to-gnns-24b3f60d6c95)
